@@ -61,7 +61,7 @@ public class ZwiftPlayDevice : AbstractZapDevice
         }
     }
 
-    private const bool SendKeys = false;
+    private const bool SendKeys = true;
 
     private void ProcessButtonNotification(ControllerNotification notification)
     {
