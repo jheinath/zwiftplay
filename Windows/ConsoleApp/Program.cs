@@ -50,7 +50,7 @@ public class Program
 
             _bleManagers[device.Id] = clientManager;
 
-            clientManager.ConnectAsync();
+            clientManager.ConnectAsync(); 
         };
 
         // keep scanning until we find both controllers.
