@@ -30,25 +30,22 @@ public class ZwiftPlayBleManager
             Console.WriteLine("Connected");
 
             //var services = gatt.GetPrimaryServicesAsync().GetAwaiter().GetResult();
-            RegisterCharacteristics(gatt);
+            await RegisterCharacteristics(gatt);
 
             Console.WriteLine("Send Start");
-            _syncRxCharacteristic.WriteValueWithResponseAsync(_zapDevice.BuildHandshakeStart()).GetAwaiter().GetResult();
+            await _syncRxCharacteristic.WriteValueWithResponseAsync(_zapDevice.BuildHandshakeStart());
         }
     }
 
-    private async void RegisterCharacteristics(RemoteGattServer gatt)
+    private async Task RegisterCharacteristics(RemoteGattServer gatt)
     {
-        var zapService = gatt.GetPrimaryServiceAsync(ZapBleUuids.ZWIFT_CUSTOM_SERVICE_UUID).GetAwaiter().GetResult();
-        _asyncCharacteristic = zapService.GetCharacteristicAsync(ZapBleUuids.ZWIFT_ASYNC_CHARACTERISTIC_UUID)
-            .GetAwaiter().GetResult();
+        var zapService = await gatt.GetPrimaryServiceAsync(ZapBleUuids.ZWIFT_CUSTOM_SERVICE_UUID);
+        _asyncCharacteristic = await zapService.GetCharacteristicAsync(ZapBleUuids.ZWIFT_ASYNC_CHARACTERISTIC_UUID);
 
-        _syncRxCharacteristic = zapService.GetCharacteristicAsync(ZapBleUuids.ZWIFT_SYNC_RX_CHARACTERISTIC_UUID)
-            .GetAwaiter().GetResult();
-        _syncTxCharacteristic = zapService.GetCharacteristicAsync(ZapBleUuids.ZWIFT_SYNC_TX_CHARACTERISTIC_UUID)
-            .GetAwaiter().GetResult();
+        _syncRxCharacteristic = await zapService.GetCharacteristicAsync(ZapBleUuids.ZWIFT_SYNC_RX_CHARACTERISTIC_UUID);
+        _syncTxCharacteristic = await zapService.GetCharacteristicAsync(ZapBleUuids.ZWIFT_SYNC_TX_CHARACTERISTIC_UUID);
 
-        _asyncCharacteristic.StartNotificationsAsync().GetAwaiter().GetResult();
+        await _asyncCharacteristic.StartNotificationsAsync();
         _asyncCharacteristic.CharacteristicValueChanged += (sender, eventArgs) =>
         {
             _zapDevice.ProcessCharacteristic("Async", eventArgs.Value);
