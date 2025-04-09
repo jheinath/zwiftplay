@@ -69,17 +69,14 @@ public class Program
         while (run)
         {
             var line = Console.ReadLine();
-            if (line != null)
+            if (line == null) continue;
+            
+            var split = line.Split(" ");
+            run = split[0] switch
             {
-                var split = line.Split(" ");
-                switch (split[0])
-                {
-                    case "q":
-                    case "quit":
-                        run = false;
-                        break;
-                }
-            }
+                "q" or "quit" => false,
+                _ => run
+            };
         }
     }
 }
