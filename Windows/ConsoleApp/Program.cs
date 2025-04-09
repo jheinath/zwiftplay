@@ -30,10 +30,11 @@ public class Program
                 return;
             }
 
-            if (_bleManagers.ContainsKey(scanResult.Device.Id))
+            if (scanResult.Device?.Id is not null && _bleManagers.ContainsKey(scanResult.Device.Id))
             {
                 return;
             }
+            
 
             var data = scanResult.ManufacturerData[ZapConstants.ZWIFT_MANUFACTURER_ID];
             var typeByte = data[0];
