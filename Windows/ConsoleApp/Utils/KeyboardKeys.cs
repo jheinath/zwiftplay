@@ -57,7 +57,7 @@ public class KeyboardKeys
         
         if (change.IsPressed)
         {
-            PressKey((byte)keyCode, nameof(keyCode), change.Button.ToString());
+            PressKey((byte)keyCode, change.Button.ToString());
         }
         else
         {
@@ -102,11 +102,10 @@ public class KeyboardKeys
         return null;
     }
 
-    private static void PressKey(byte keyCode, string keyboardKey, string zwiftPlayButton)
+    private static void PressKey(byte keyCode, string zwiftPlayButton)
     {
         // probably need to keep resending this until its released but not really tested.
-        Console.WriteLine($"Pressed key code: {keyCode}" +
-                          $"Should trigger keyboard key: {keyboardKey}" +
+        Console.WriteLine($"Pressed key code: {keyCode} " +
                           $"Swift Play button: {zwiftPlayButton}");
         keybd_event(keyCode, 0x45, KEYEVENTF_KEYDOWN, 0);
     }
