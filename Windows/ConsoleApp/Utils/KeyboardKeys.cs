@@ -78,7 +78,7 @@ public class KeyboardKeys
             case ZwiftPlayButton.Right:
                 return RIGHT;
             case ZwiftPlayButton.LeftShoulder:
-                return K;
+                return I;
             case ZwiftPlayButton.LeftPower:
                 break;
             
@@ -91,7 +91,7 @@ public class KeyboardKeys
             case ZwiftPlayButton.Z:
                 return Z;
             case ZwiftPlayButton.RightShoulder:
-                return I;
+                return K;
             case ZwiftPlayButton.RightPower:
                 break;
             
