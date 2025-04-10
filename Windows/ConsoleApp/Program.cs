@@ -9,7 +9,7 @@ public class Program
 
     public static void Main(string[] args)
     {
-        // bluetooth availablity on PC. 
+        // bluetooth availablity on PC.
 
         var available = Bluetooth.GetAvailabilityAsync().GetAwaiter().GetResult();
         if (!available)
